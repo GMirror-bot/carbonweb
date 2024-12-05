@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页面</title>
+    <link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="/static/index.css">
+    <script src="/static/SupportingDocuments/vue.js"></script>
+    <script src="/static/index.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/image/webimg/icon.png">
+</head>
+<body class="login-body" oncontextmenu="return false">
+
+<div id="app" class="login-box">
+    <el-form action="/carbonweb/" method="post" enctype="multipart/form-data" name="login1">
+        {% csrf_token %}
+        <h4 class="login-title">南方路机商混混凝土平台</h4>
+        <el-input type="text" placeholder="请输入用户名" name="User" v-model="user" class="login-user"></el-input>
+        <el-input type="password" placeholder="请输入密码" name="Pass" v-model="pwd" class="login-pwd"></el-input>
+        <el-button type="primary" value="登陆" class="login-login" @click="upsubmit">登陆</el-button>
+    </el-form>
+    <div>
+        <a href="/carbonweb/register/" style="text-decoration:none;color:#333;"><small>用户注册</small></a>
+    </div>
+</div>
+
+<script>
+var app = new Vue({
+    el: "#app",
+    data: {
+        user: "",
+        pwd: ""
+    },
+    methods: {
+        upsubmit: function() {
+            if (this.user) {
+                document.login1.submit();
+            } else {
+                this.$message.error({
+                    showClose: true,
+                    message: '请输入用户名',
+                    type: 'error',
+                    center: true
+                });
+            }
+        }
+    }
+});
+</script>
+
+<style>
+.login-body {
+    background-image: url(/static/image/webimg/login.jpg);
+    background-size: 100% 111%;
+    overflow: hidden;
+}
+.login-box {
+    background-color: white;
+    width: 300px;
+    margin: 15% 70%;
+    border: 1px solid #DCDFE6;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px #DCDFE6;
+}
+.login-user, .login-pwd {
+    margin: 10px 0 5px 0;
+}
+.login-login {
+    width: 300px;
+    margin: 10px 0px;
+}
+.login-title {
+    margin: 0px 0 0px 0;
+    text-align: center;
+    font-size: 25px;
+}
+</style>
+
+<script>
+document.onkeydown = function(event) {
+    if ((event.ctrlKey && event.keyCode == 85) ||
+        (event.keyCode == 123) ||
+        (event.ctrlKey && event.keyCode == 83)) {
+        return false;
+    }
+};
+document.body.onselectstart = function() {
+    return false;
+};
+</script>
+</body>
+</html>

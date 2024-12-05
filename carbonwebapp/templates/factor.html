@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="utf-8" />
+		<title>测试</title>
+		<link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico">
+		<link rel="stylesheet" href="/static/index.css">
+		<script src="/static/SupportingDocuments/vue.js"></script>
+		<script src="/static/index.js"></script>
+		<script src="/static/SupportingDocuments/echarts.min.js"></script>
+		<link rel ="shortcut icon" type="image/x-icon" href="/static/image/labelimgweb/web_icon.png">
+	</head>
+<body style="height:100%;"oncontextmenu=self.event.returnValue=false>
+
+<div id="app" style="height:100%;">
+    <div style="background-color: #EBEBEB;height:100%;">
+		<!-- 头部导航栏 -->
+        <div style="width:100%;height:6%;background-color: #636363; overflow: hidden;">
+			<span class="demonstration" style="float:left;padding-top:5px;color:white;width: 10%;text-align: center;height:100%;">
+				<el-button type="text"style="text-decoration:none;margin:0% 5% 0% 10%;color:rgb(255,255,255);white-space:nowrap;" onclick="document:gofirstPage.submit()"><img src="/static/image/webimg/Picture.png" width="100%" height="100%"></el-button></span>
+<!--				<el-button type="text"style="text-decoration:none;margin:-5% 5% 0% 10%;color:rgb(255,255,255);white-space:nowrap;" onclick="document:gofirstPage.submit()"><img src="/static/image/webimg/icon.png" width="25%" height="40%">NFLG智慧混凝土</el-button>-->
+            </span>
+
+            <span class="demonstration" style="float:right;padding-top:10px;margin-right:1%">
+                <el-dropdown trigger="click">
+                  <span class="el-dropdown-link" style="color:white">
+                    <i>UID:{{UID}}</i>
+                    <i class="el-icon-s-custom"></i>{{User}}<i class="el-icon-caret-bottom el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>个人信息</el-dropdown-item>
+                      <el-dropdown-item><a href="/carbonweb" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">退出登录</a></el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+            </span>
+        </div>
+	<!-- 主页面 -->
+
+	<el-container style="height:93.4%;width:100%; border: 1px solid rgba(9, 35, 202, 0.0)">
+		<!-- 侧边导航栏 -->
+		<el-container style="border:1px solid rgba(250,221,234,0); height:100%;width:100%;">
+			<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+				<el-menu :default-openeds="['1', '3']">
+					<el-menu-item index="1">
+						<template slot="title"><i class="el-icon-s-grid"></i><a onclick="document:godistribute.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">智慧混凝土</a></template>
+					</el-menu-item>
+					<el-menu-item index="2">
+						<template slot="title"><i class="el-icon-wallet"></i><a onclick="document:gostrength.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">抗压强度预测系统</a></template>
+					</el-menu-item>
+					{% comment %} <el-menu-item index="3">
+						<template slot="title"><i class="el-icon-wallet"></i><a onclick="document:goslump.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">塌落度预测系统</a></template>
+					</el-menu-item> {% endcomment %}
+					<el-menu-item index="4">
+						<template slot="title"><i class="el-icon-data-analysis"></i><a onclick="document:gocarbon.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">配比优化系统</a></template>
+					</el-menu-item>
+					<el-menu-item index="5">
+						<template slot="title"><i class="el-icon-s-order"></i><a onclick="document:gofactor.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">碳排放</a></template>
+					</el-menu-item>
+					{% comment %} <el-menu-item index="6"> {% endcomment %}
+						{% comment %} <template slot="title"><i class="el-icon-tickets"></i><a onclick="document:goreadme.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">使用说明</a></template> {% endcomment %}
+					{% comment %} </el-menu-item> {% endcomment %}
+
+				</el-menu>
+				{% comment %} <form action="/carbonweb/firstPage/" method="post" enctype="multipart/form-data" id="gofirstPage">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form> {% endcomment %}
+				<form action="/carbonweb/factor/" method="post" enctype="multipart/form-data" id="gofactor">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/readme/" method="post" enctype="multipart/form-data" id="goreadme">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/distribute/" method="post" enctype="multipart/form-data" id="godistribute">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/strength/" method="post" enctype="multipart/form-data" id="gostrength">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/slump/" method="post" enctype="multipart/form-data" id="goslump">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/carbon/" method="post" enctype="multipart/form-data" id="gocarbon">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+		  </el-aside>
+
+		<!-- 主内容区 -->
+            <div style="border:2px solid rgba(255,255,255,1);width:100%;height:100%;overflow:auto;">
+				<el-card style="margin: 1% 1% 1% 0.5%;overflow: auto;">
+					<h1> 碳排放计算器</h1>
+					<el-divider>推荐配方</el-divider>
+					<el-button type="primary" plain @click="creatFormula">C30</el-button>
+					<el-button type="primary" plain @click="creatFormula1">C55</el-button>
+					<el-button type="primary" plain @click="creatFormula2">掺合料C30</el-button>
+
+				</el-card>
+				<el-col :span="12"><el-card style="height:1200px;margin: 1% 1% 1% 1%;overflow: auto;">
+					<h1> 碳排放计算流程</h1>
+					<el-form action="/carbonweb/carbon/" method="post" enctype="multipart/form-data" label-width="90px":label-position='right'  name="creat">
+						{% csrf_token %}
+   					<el-divider content-position="left"><h1>原材料获取</h1></el-divider>
+          				<el-row :gutter="5" type="flex"align="middle">
+						<el-col :span="1"  ><h4>材料消耗量</h4></el-col>
+						<el-col :span="7">
+						<el-form-item label="水泥:" ><el-input type="number" name="creatform" v-model="materials.cement.consum" ><template slot="suffix">吨</template></el-input></el-form-item>
+                        <el-form-item label="高炉渣:"><el-input type="number" name="creatform" v-model="materials.GBFS.consum"><template slot="suffix">吨</template></el-input></el-form-item>
+                        <el-form-item label="飞灰:"><el-input type="number" name="creatform" v-model="materials.FA.consum"><template slot="suffix">吨</template></el-input></el-form-item>
+                        <el-form-item label="水:"><el-input type="number" name="creatform" v-model="materials.water.consum"><template slot="suffix">吨</template></el-input></el-form-item>
+                        <el-form-item label="细骨料:"><el-input type="number" name="creatform" v-model="materials.FAggregate.consum"><template slot="suffix">吨</template></el-input></el-form-item>
+                        <el-form-item label="粗骨料:"><el-input type="number" name="creatform" v-model="materials.CAggregate.consum"><template slot="suffix">吨</template></el-input></el-form-item>
+                        <el-form-item label="减水剂:"><el-input type="number" name="creatform" v-model="materials.Superplasticizer.consum"><template slot="suffix">吨</template></el-input></el-form-item></el-col>
+						<el-col :span="1" ></el-col>
+						<el-col :span="1"><h4>材料碳排放因子</h4></el-col>
+						<el-col :span="14">
+						<el-form-item label="水泥:" ><el-select v-model="materials.cement.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistcement" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.cement.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+                        <el-form-item label="高炉渣:"><el-select v-model="materials.GBFS.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistGBFS" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.GBFS.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+                        <el-form-item label="飞灰:"><el-select v-model="materials.FA.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistFA" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.FA.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+                        <el-form-item label="水:"><el-select v-model="materials.water.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistwater" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.water.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+                        <el-form-item label="细骨料:"><el-select v-model="materials.FAggregate.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistFAggregate" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.FAggregate.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+                        <el-form-item label="粗骨料:"><el-select v-model="materials.CAggregate.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistCAggregate" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.CAggregate.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+                        <el-form-item label="减水剂:"><el-select v-model="materials.Superplasticizer.consumcarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistSuperplasticizer" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.Superplasticizer.consumcarbon" style="width:45%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/t</sup></template></el-input></el-form-item>
+						</el-row>
+   					<el-divider content-position="right"><h1>原材料运输</h1></el-divider>
+          				<el-row :gutter="5" type="flex"align="middle">
+						<el-col :span="1"  ><h4>材料运输距离</h4></el-col>
+						<el-col :span="7">
+						<el-form-item label="水泥:" ><el-input type="number" name="creatform" v-model="materials.cement.distance"><template slot="suffix">km</template></el-input></el-form-item>
+                        <el-form-item label="高炉渣:"><el-input type="number" name="creatform" v-model="materials.GBFS.distance"><template slot="suffix">km</template></el-input></el-form-item>
+                        <el-form-item label="飞灰:"><el-input type="number" name="creatform" v-model="materials.FA.distance"><template slot="suffix">km</template></el-input></el-form-item>
+                        <el-form-item label="水:"><el-input type="number" name="creatform" v-model="materials.water.distance"><template slot="suffix">km</template></el-input></el-form-item>
+                        <el-form-item label="细骨料:"><el-input type="number" name="creatform" v-model="materials.FAggregate.distance"><template slot="suffix">km</template></el-input></el-form-item>
+                        <el-form-item label="粗骨料:"><el-input type="number" name="creatform" v-model="materials.CAggregate.distance"><template slot="suffix">km</template></el-input></el-form-item>
+                        <el-form-item label="减水剂:"><el-input type="number" name="creatform" v-model="materials.Superplasticizer.distance"><template slot="suffix">km</template></el-input></el-form-item></el-col>
+						<el-col :span="1" ></el-col>
+						<el-col :span="1"><h4>运输碳排放因子</h4></el-col>
+						<el-col :span="14">
+						<el-form-item label="运输方式:" ><el-select v-model="materials.cement.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number"  name="creatform" v-model="materials.cement.distancecarbon" style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></sup></template></el-input></el-form-item>
+                        <el-form-item label="运输方式:"><el-select v-model="materials.GBFS.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.GBFS.distancecarbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+                        <el-form-item label="运输方式:"><el-select v-model="materials.FA.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.FA.distancecarbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+                        <el-form-item label="运输方式:"><el-select v-model="materials.water.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.water.distancecarbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+                        <el-form-item label="运输方式:"><el-select v-model="materials.FAggregate.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.FAggregate.distancecarbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+                        <el-form-item label="运输方式:"><el-select v-model="materials.CAggregate.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.CAggregate.distancecarbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+                        <el-form-item label="运输方式:"><el-select v-model="materials.Superplasticizer.distancecarbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="materials.Superplasticizer.distancecarbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+						</el-row>
+					<el-divider content-position="left"><h1>产品生产</h1></el-divider>
+					<el-row :gutter="5" type="flex"align="middle">
+						<el-col :span="1"  ><h4>能源消耗量</h4></el-col>
+						<el-col :span="7">
+						<el-form-item label="电力:" ><el-input type="number" name="produce" v-model="produce.power.consum" ><template slot="suffix">kwh</template></el-input></el-form-item>
+						<el-form-item label="燃料:" ><el-input type="number" name="produce" v-model="produce.fuel.consum" ><template slot="suffix">TJ</template></el-input></el-form-item>
+						</el-col>
+						<el-col :span="1" ></el-col>
+						<el-col :span="1"><h4>能源碳排放因子</h4></el-col>
+						<el-col :span="14">
+						<el-form-item label="电力:"><el-select v-model="produce.power.carbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistenergy" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="produce" v-model="produce.power.carbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/kwh</sup></template></el-input></el-form-item>
+						<el-form-item label="燃料:"><el-select v-model="produce.fuel.carbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistenergy" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="produce" v-model="produce.fuel.carbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/TJ</sup></template></el-input></el-form-item>
+						</el-col>
+					</el-row>
+					<el-divider content-position="right"><h1>产品运输</h1></el-divider>
+					<el-row :gutter="5" type="flex"align="middle">
+						<el-col :span="1"  ><h4>产品</h4></el-col>
+						<el-col :span="7">
+						<el-form-item label="产品质量:" ><el-input type="number" name="produce" v-model="producetransport.consum" ><template slot="suffix">t</template></el-input></el-form-item>
+						<el-form-item label="运输距离:" ><el-input type="number" name="produce" v-model="producetransport.distance" ><template slot="suffix">km</template></el-input></el-form-item>
+						</el-col>
+						<el-col :span="1" ></el-col>
+						<el-col :span="1"><h4>运输碳排放因子</h4></el-col>
+						<el-col :span="14">
+						<el-form-item label="运输方式:"><el-select v-model="producetransport.carbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistTransport" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="produce" v-model="producetransport.carbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/（t*km）</sup></template></el-input></el-form-item>
+						</el-col>
+					</el-row>	
+					<el-divider content-position="left"><h1>施工</h1></el-divider>
+					<el-row :gutter="5" type="flex"align="middle">
+						<el-col :span="1"  ><h4>能源消耗量</h4></el-col>
+						<el-col :span="7">
+						<el-form-item label="电力:" ><el-input type="number" name="produce" v-model="build.power.consum" ><template slot="suffix">kwh</template></el-input></el-form-item>
+						<el-form-item label="燃料:" ><el-input type="number" name="produce" v-model="build.fuel.consum" ><template slot="suffix">TJ</template></el-input></el-form-item>
+						</el-col>
+						<el-col :span="1" ></el-col>
+						<el-col :span="1"><h4>能源碳排放因子</h4></el-col>
+						<el-col :span="14">
+						<el-form-item label="电力:"><el-select v-model="build.power.carbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistenergy" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="produce" v-model="build.power.carbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/kwh</sup></template></el-input></el-form-item>
+						<el-form-item label="燃料:"><el-select v-model="build.fuel.carbon" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistenergy" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="produce" v-model="build.fuel.carbon " style="width:50%"><template slot="suffix"><sup>kgCO<sub>2</sub>e/TJ</sup></template></el-input></el-form-item>
+						</el-col>
+					</el-row>						
+					</el-form>
+				</el-card></el-col>
+				<el-col :span="12">
+					<el-card style="margin: 1% 1% 1% 1%">
+					<h1> 碳足迹</h1>
+   					<el-divider></el-divider>
+					<div id="ss" style="width: 780px;height:480px;"></div>
+					</el-card>
+					<el-card body-style="height:537px" style="margin: 1% 1% 1% 1%;overflow: auto;" >
+					<h1> 碳排放因子数据库</h1>
+   					<el-divider></el-divider>
+					<el-form action="/carbonweb/distribute/creat/" method="post" enctype="multipart/form-data" id="gocreat">
+						{% csrf_token %}
+						<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+					</el-form>
+					<el-form action="/carbonweb/distribute/subject/" method="post" enctype="multipart/form-data" name="gosubject">
+						{% csrf_token %}
+						<el-input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none"></el-input>
+						<el-input type="text" name="SID" v-model="sid" readonly="readonly" style = "display:none"></el-input>
+					</el-form>
+					<template>
+				    <el-table :data="factorlist" style="width:100%" @selection-change="selectL"  @cell-mouse-enter="(row,column,e)=>mouseenter(row,column,e)" @row-click="(row,column,e)=>handleRowClicked(row,column,e)"   stripe >
+						<el-table-column type="selection"></el-table-column>
+						<el-table-column prop="FactorCalss" label="类别":filters="{{factorClasslist}}" :filter-method="filterTag" filter-placement="bottom-end"></el-table-column>
+						<el-table-column prop="FactorName" label="名称" ></el-table-column>
+						<el-table-column prop="FactorNum" label="数值" ></el-table-column>
+						<el-table-column prop="FactorUnit" label="单位" ></el-table-column>
+						<el-table-column prop="FactorSource" label="来源" ></el-table-column>
+				    </el-table>
+					</template>
+				</el-card></el-col>
+			</div>
+		  </el-container>
+		</el-container>
+
+	</div>
+
+ </div>
+</body>
+
+<script>
+	window.onload=function(){
+	a.$data.pageval = '{{pageval}}';
+	
+	a.$data.factorlist = '{{factorlist}}'
+	while(a.$data.factorlist.indexOf('&#x27')!= '-1'){a.$data.factorlist = a.$data.factorlist.replace('&#x27;','"')}a.$data.factorlist = JSON.parse(a.$data.factorlist);
+	a.$data.factorlistcement = '{{factorlistcement}}'
+	while(a.$data.factorlistcement.indexOf('&#x27')!= '-1'){a.$data.factorlistcement = a.$data.factorlistcement.replace('&#x27;','"')}a.$data.factorlistcement = JSON.parse(a.$data.factorlistcement);
+	a.$data.factorlistGBFS = '{{factorlistGBFS}}'
+	while(a.$data.factorlistGBFS.indexOf('&#x27')!= '-1'){a.$data.factorlistGBFS = a.$data.factorlistGBFS.replace('&#x27;','"')}a.$data.factorlistGBFS = JSON.parse(a.$data.factorlistGBFS);
+	a.$data.factorlistFA = '{{factorlistFA}}'
+	while(a.$data.factorlistFA.indexOf('&#x27')!= '-1'){a.$data.factorlistFA = a.$data.factorlistFA.replace('&#x27;','"')}a.$data.factorlistFA = JSON.parse(a.$data.factorlistFA);
+	a.$data.factorlistwater = '{{factorlistwater}}'
+	while(a.$data.factorlistwater.indexOf('&#x27')!= '-1'){a.$data.factorlistwater = a.$data.factorlistwater.replace('&#x27;','"')}a.$data.factorlistwater = JSON.parse(a.$data.factorlistwater);
+	a.$data.factorlistFAggregate = '{{factorlistFAggregate}}'
+	while(a.$data.factorlistFAggregate.indexOf('&#x27')!= '-1'){a.$data.factorlistFAggregate = a.$data.factorlistFAggregate.replace('&#x27;','"')}a.$data.factorlistFAggregate = JSON.parse(a.$data.factorlistFAggregate);
+	a.$data.factorlistCAggregate = '{{factorlistCAggregate}}'
+	while(a.$data.factorlistCAggregate.indexOf('&#x27')!= '-1'){a.$data.factorlistCAggregate = a.$data.factorlistCAggregate.replace('&#x27;','"')}a.$data.factorlistCAggregate = JSON.parse(a.$data.factorlistCAggregate);
+	a.$data.factorlistSuperplasticizer = '{{factorlistSuperplasticizer}}'
+	while(a.$data.factorlistSuperplasticizer.indexOf('&#x27')!= '-1'){a.$data.factorlistSuperplasticizer = a.$data.factorlistSuperplasticizer.replace('&#x27;','"')}a.$data.factorlistSuperplasticizer = JSON.parse(a.$data.factorlistSuperplasticizer);
+	a.$data.factorlistTransport = '{{factorlistTransport}}'
+	while(a.$data.factorlistTransport.indexOf('&#x27')!= '-1'){a.$data.factorlistTransport = a.$data.factorlistTransport.replace('&#x27;','"')}a.$data.factorlistTransport = JSON.parse(a.$data.factorlistTransport);
+	a.$data.factorlistenergy = '{{factorlistenergy}}'
+	while(a.$data.factorlistenergy.indexOf('&#x27')!= '-1'){a.$data.factorlistenergy = a.$data.factorlistenergy.replace('&#x27;','"')}a.$data.factorlistenergy = JSON.parse(a.$data.factorlistenergy);
+
+	}
+	var a = new Vue({
+		el: '#app',
+		data:{
+			materials:{
+				cement:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+				GBFS:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+				FA:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+				water:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+				FAggregate:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+				CAggregate:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+				Superplasticizer:{consum:'',consumcarbon:'',distance:'',distancecarbon:''},
+			},
+			produce:{
+				power:{consum:'',carbon:''},
+				fuel:{consum:'',carbon:''},
+			},
+			producetransport:{
+				consum:'',distance:'',carbon:''
+			},
+			build:{
+				power:{consum:'',carbon:''},
+				fuel:{consum:'',carbon:''},				
+			},
+			factorlist:[],
+			factorlistcement:[],
+			factorlistGBFS:[],
+			factorlistFA:[],
+			factorlistwater:[],
+			factorlistFAggregate:[],
+			factorlistCAggregate:[],
+			factorlistSuperplasticizer:[],
+			factorlistTransport:[],
+			factorlistenergy:[],
+			savesidlist:[],
+			dialogVisible:false,
+			XM:'',
+			sid:'',
+			url:'',
+			IID:'',
+			pageval:0,
+
+		},
+		methods: {
+		handleRowClicked(row, column, event){
+			{% comment %} document.gosubject.submit(); {% endcomment %}
+		},
+		mouseenter(row, column, event){
+			this.sid=row.SID
+			this.url = row.URL
+		},
+		deleteSID(index){
+			this.factorlist.splice(index-1,1)
+		},
+		filterTag(value, row) {
+			return row.FactorCalss === value;
+		},
+		creatFormula(){
+			this.materials={
+				cement:{consum:0.525,consumcarbon:735,distance:50,distancecarbon:0.334},
+				GBFS:{consum:0,consumcarbon:0,distance:0,distancecarbon:0},
+				FA:{consum:0,consumcarbon:0,distance:0,distancecarbon:0},
+				water:{consum:0.186,consumcarbon:0.168,distance:400,distancecarbon:0.334},
+				FAggregate:{consum:0.613,consumcarbon:2.51,distance:400,distancecarbon:0.334},
+				CAggregate:{consum:1.125,consumcarbon:2.18,distance:400,distancecarbon:0.334},
+				Superplasticizer:{consum:0,consumcarbon:0,distance:0,distancecarbon:0},
+			}
+			this.produce={
+				power:{consum:500,carbon:0.594},
+				fuel:{consum:100,carbon:0.0944},
+			}
+			this.producetransport={
+				consum:1,distance:50,carbon:0.334
+			}
+			this.build={
+				power:{consum:500,carbon:0.594},
+				fuel:{consum:100,carbon:0.594},				
+			}
+		},
+		creatFormula1(){
+			this.materials={
+				cement:{consum:0.48,consumcarbon:735,distance:50,distancecarbon:0.334},
+				GBFS:{consum:0,consumcarbon:0,distance:0,distancecarbon:0},
+				FA:{consum:0,consumcarbon:0,distance:0,distancecarbon:0},
+				water:{consum:0.192,consumcarbon:0.168,distance:400,distancecarbon:0.334},
+				FAggregate:{consum:0.936,consumcarbon:2.51,distance:400,distancecarbon:0.334},
+				CAggregate:{consum:0.712,consumcarbon:2.18,distance:400,distancecarbon:0.334},
+				Superplasticizer:{consum:0,consumcarbon:0,distance:0,distancecarbon:0},
+			}
+			this.produce={
+				power:{consum:500,carbon:0.594},
+				fuel:{consum:100,carbon:0.0944},
+			}
+			this.producetransport={
+				consum:1,distance:50,carbon:0.334
+			}
+			this.build={
+				power:{consum:500,carbon:0.594},
+				fuel:{consum:100,carbon:0.594},				
+			}
+		},
+		creatFormula2(){
+			this.materials={
+				cement:{consum:0.151,consumcarbon:735,distance:50,distancecarbon:0.334},
+				GBFS:{consum:0.174,consumcarbon:192,distance:400,distancecarbon:0.334},
+				FA:{consum:0.108,consumcarbon:34.5,distance:400,distancecarbon:0.334},
+				water:{consum:0.167,consumcarbon:0.168,distance:400,distancecarbon:0.334},
+				FAggregate:{consum:0.813,consumcarbon:2.51,distance:400,distancecarbon:0.334},
+				CAggregate:{consum:0.835,consumcarbon:2.18,distance:400,distancecarbon:0.334},
+				Superplasticizer:{consum:0.16,consumcarbon:1139,distance:400,distancecarbon:0.334},
+			}
+			this.produce={
+				power:{consum:500,carbon:0.594},
+				fuel:{consum:100,carbon:0.0944},
+			}
+			this.producetransport={
+				consum:1,distance:50,carbon:0.334
+			}
+			this.build={
+				power:{consum:500,carbon:0.594},
+				fuel:{consum:100,carbon:0.594},				
+			}
+		},
+			},
+	})
+
+
+	var ss = echarts.init(document.getElementById('ss'));
+
+
+	var ssoption= {
+	  tooltip: {trigger: 'item',formatter: '{a} <br/>{b}: {c} ({d}%)'},
+	  legend: {data: []},
+
+	  title: {
+		text: '',//主标题 (主标题里面来动态显示当前数据总数)
+		subtext: '合计碳排放',//副标题
+		x: 'left',//标题x轴居中（也可以是: left || center || right || 百分比：xx% || xx(默认单位px)  ）
+		y: 'top',//标题y轴居中（也可以是: top || center || bottom || 百分比：xx% || xx(默认单位px)  ）
+		itemGap: 5,//主标题和副标题之间的距离(默认为 0)
+		textStyle: {//设置主标题样式
+			fontSize: 25,
+			color: '#666',
+			backroung: 'blue'
+		},
+		subtextStyle: {//设置副标题样式
+			fontSize: 15,
+			color: "#666"
+		}
+
+		},	
+	  series: [
+		{
+		name: '碳排放占比',
+		type: 'pie',
+		selectedMode: 'single',
+		radius: [0, '30%'],
+		label: {position: 'inner',fontSize: 14},
+		labelLine: {show: false},
+		data: []
+		},
+		{
+		  name: '碳排放占比',
+		  type: 'pie',
+		  radius: ['45%', '60%'],
+		  labelLine: {length: 30},
+		  label: {
+			formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+			backgroundColor: '#F6F8FC',
+			borderColor: '#8C8D8E',
+			borderWidth: 1,
+			borderRadius: 4,
+			rich: {a: {color: '#6E7079',lineHeight: 22,align: 'center'},hr: {borderColor: '#8C8D8E',width: '100%',borderWidth: 1,height: 0},b: {color: '#4C5058',fontSize: 14,fontWeight: 'bold',lineHeight: 33},per: {color: '#fff',backgroundColor: '#4C5058',padding: [3, 4],borderRadius: 4}}
+		  },
+		  data: []
+		}
+	  ]
+	};
+
+	setInterval(function () {
+		var InData=[];
+		var OutData=[];
+		let totalconsum = 0
+		let totaldistance = 0
+		let totalproduce = 0
+		let totalbuild=0
+		for (var key in a._data.materials){
+			const { consum, consumcarbon, distance, distancecarbon } = a._data.materials[key];
+			OutData.push({value:(consum*consumcarbon).toFixed(2),name:'材料：'.concat(key)})
+			OutData.push({value:(consum*distance*distancecarbon).toFixed(2)  ,name:'运输：'.concat(key)})
+			totalconsum+=consum*consumcarbon
+			totaldistance+=consum*distance*distancecarbon
+		}
+		for (var key1 in a._data.produce){
+			const { consum, carbon } = a._data.produce[key1];
+			OutData.push({ value: (consum * carbon).toFixed(2), name: '能源：' + key1 });
+			totalproduce += consum * carbon;
+		}
+		
+		const { consum, distance, carbon } = a._data.producetransport;
+		const producetransport = consum * distance * carbon;
+		OutData.push({value:producetransport,name:'产品运输'})
+			
+		for (var key2 in a._data.build){
+			const { consum, carbon } = a._data.build[key2];
+			OutData.push({ value: (consum * carbon).toFixed(2), name: '施工：' + key2 });
+			totalbuild += consum * carbon;
+		}
+		InData.push({value:totalconsum.toFixed(2),name:'材料'})
+		InData.push({value:totaldistance.toFixed(2),name:'材料运输'})
+		InData.push({value:totalproduce.toFixed(2),name:'生产'})
+		InData.push({value:producetransport.toFixed(2),name:'产品运输'})
+		InData.push({value:totalbuild.toFixed(2),name:'施工'})
+
+		this.ssoption.series[0].data = InData
+		this.ssoption.series[1].data = OutData
+		this.ssoption.title.text = (totalconsum+totaldistance+totalproduce+producetransport+totalbuild).toFixed(2)+'kgC02e'
+		ss.setOption(ssoption);
+	},2100);
+	ss.setOption(ssoption);
+	setTimeout(()=>{ss.setOption(this.ssoption);},100)
+</script>
+
+<style>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
+  .el-aside {
+    color: #333;
+  }
+  footer {
+    border-bottom: 50px solid #636363;
+    border-left: 100px solid transparent;
+    border-right: none;
+    border-top: none;
+    color: rgba(255, 255, 255, 0.5);
+    height: 0;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 280px;
+  }
+</style>
+
+<script>
+    // 按键触发事件
+	document.onkeydown = function(event) {
+		// 禁止Ctrl+U，查看源代码
+		if (event.ctrlKey && event.keyCode === 85) {
+			event.preventDefault(); // 阻止默认行为
+			return false;
+		}
+
+		// 禁止F12，开发者工具
+		if (event.keyCode === 123) {
+			event.preventDefault();
+			return false;
+		}
+
+		// 禁止Ctrl+S，保存页面
+		if (event.ctrlKey && event.keyCode === 83) {
+			event.preventDefault();
+			return false;
+		}
+
+		// 禁止F5，刷新页面
+		if (event.keyCode === 116) {
+			event.preventDefault();
+			return false;
+		}
+	};
+
+	// 网站禁用文字选择
+	document.body.onselectstart = function() {
+		return false; // 阻止选择行为
+	};
+</script>
+
+</html>

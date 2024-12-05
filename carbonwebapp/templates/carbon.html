@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="utf-8" />
+		<title>测试</title>
+		<link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico">
+		<!-- 1. 导入css -->
+		<link rel="stylesheet" href="/static/index.css">
+		<!-- 2. 引入vue和vue-->
+		<script src="/static/SupportingDocuments/vue.js"></script>
+		<!-- 3. 引入ElementUI组件 -->
+		<script src="/static/index.js"></script>
+		<script src="/static/SupportingDocuments/echarts.min.js"></script>
+		<!-- 4. 引入图标 -->
+		<link rel ="shortcut icon" type="image/x-icon" href="/static/image/webimg/icon.png">
+	</head>
+<body style="height:100%;"oncontextmenu=self.event.returnValue=false>
+<div id="app" style="height:100%;">
+    <div style="background-color: #EBEBEB;height:100%;">
+		<!-- 头部导航栏 -->
+        <div style="width:100%;height:6%;background-color: #636363; overflow: hidden;">
+            <span class="demonstration" style="float:left;padding-top:5px;color:white;width: 10%;text-align: center;height:100%;">
+				<el-button type="text"style="text-decoration:none;margin:0% 5% 0% 10%;color:rgb(255,255,255);white-space:nowrap;" onclick="document:gofirstPage.submit()"><img src="/static/image/webimg/Picture.png" width="100%" height="100%"></el-button></span>
+            <span class="demonstration" style="float:right;padding-top:10px;margin-right:1%">
+                <el-dropdown trigger="click">
+                  <span class="el-dropdown-link" style="color:white">
+                    <i>UID:{{UID}}</i>
+                    <i class="el-icon-s-custom"></i>{{User}}<i class="el-icon-caret-bottom el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>个人信息</el-dropdown-item>
+                      <el-dropdown-item><a href="/carbonweb" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">退出登录</a></el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+            </span>
+        </div>
+	<!-- 主页面 -->
+
+	<el-container style="height:93.4%;width:100%; border: 1px solid rgba(9, 20, 202, 0.0)">
+		<!-- 侧边导航栏 -->
+		<el-container style="border:1px solid rgba(250,221,234,0); height:100%;width:100%;">
+			<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+				<el-menu :default-openeds="['1', '3']">
+					<el-menu-item index="1">
+						<template slot="title"><i class="el-icon-s-grid"></i><a onclick="document:godistribute.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">智慧混凝土</a></template>
+					</el-menu-item>
+					<el-menu-item index="2">
+						<template slot="title"><i class="el-icon-wallet"></i><a onclick="document:gostrength1.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">抗压强度预测系统</a></template>
+					</el-menu-item>
+					{% comment %} <el-menu-item index="3">
+						<template slot="title"><i class="el-icon-wallet"></i><a onclick="document:goslump.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">塌落度预测系统</a></template>
+					</el-menu-item> {% endcomment %}
+					<el-menu-item index="4">
+						<template slot="title"><i class="el-icon-data-analysis"></i><a onclick="document:gocarbon1.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">配比优化系统</a></template>
+					</el-menu-item>
+					<el-menu-item index="5">
+						<template slot="title"><i class="el-icon-s-order"></i><a onclick="document:gofactor.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">碳排放</a></template>
+					</el-menu-item>
+					{% comment %} <el-menu-item index="6">
+						<template slot="title"><i class="el-icon-tickets"></i><a onclick="document:goreadme.submit()" style="text-decoration:none;margin:0px 0px;color:rgba(0,0,0);white-space:nowrap;">使用说明</a></template>
+					</el-menu-item> {% endcomment %}
+
+				</el-menu>
+				{% comment %} <form action="/carbonweb/firstPage/" method="post" enctype="multipart/form-data" id="gofirstPage">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form> {% endcomment %}
+				<form action="/carbonweb/factor/" method="post" enctype="multipart/form-data" id="gofactor">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/readme/" method="post" enctype="multipart/form-data" id="goreadme">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/distribute/" method="post" enctype="multipart/form-data" id="godistribute">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/strength/" method="post" enctype="multipart/form-data" name="gostrength">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+					<input type="text" name="FormulaID" v-model="FormulaID" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/strength/" method="post" enctype="multipart/form-data" name="gostrength1">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/slump/" method="post" enctype="multipart/form-data" id="goslump">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+				<form action="/carbonweb/carbon/" method="post" enctype="multipart/form-data" id="gocarbon">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+					<input type="text" name="OptimizeID" v-model="OptimizeID" readonly="readonly" style = "display:none">
+
+				</form>
+				<form action="/carbonweb/carbon/" method="post" enctype="multipart/form-data" id="gocarbon1">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+				</form>
+
+				<form action="/carbonweb/carbon/" method="post" enctype="multipart/form-data" id="gocarbonDelete">
+					{% csrf_token %}
+					<input type="text" name="UID" value="{{UID}}" readonly="readonly" style = "display:none">
+					<input type="text" name="delete" value="1" readonly="readonly" style = "display:none">
+					<input type="text" name="OptimizeID" value="{{OptimizeID1}}" readonly="readonly" style = "display:none">
+
+				</form>
+		  </el-aside>
+
+		<!-- 主内容区 -->
+            <div style="border:2px solid rgba(255,255,255,1);width:100%;height:100%;overflow:auto;">
+				<el-card style="margin: 1% 1% 1% 1%">
+					<h1> 配比优化系统</h1>
+					<el-divider content-position="right">
+					<el-button type="primary" type="primary" plain style="float:right;padding-top:10px"@click="dialogVisible=true">新建任务</el-button>
+   					</el-divider>
+				</el-card>
+				<el-col :span="12"><el-card style="margin: 1% 1% 1% 2% ;">
+					<h1> 优化记录</h1>
+   					<el-divider></el-divider>
+				    <el-table :data="Optimizes" style="width:100%" @selection-change="selectL"  @cell-mouse-enter="(row,column,e)=>mouseenter(row,column,e)" @row-click="(row,column,e)=>handleRowClicked1(row,column,e)"   stripe >
+<!--						<el-table-column type="selection"></el-table-column>-->
+<!--						<el-table-column prop="FactorCalss" label="类别":filters="{{factorClasslist}}" :filter-method="filterTag" filter-placement="bottom-end"></el-table-column>-->
+						<el-table-column prop="OptimizeID" label="编号" ></el-table-column>
+						<el-table-column prop="TargetDay" label="目标天数" ></el-table-column>
+						<el-table-column prop="TargetStrength" label="目标强度" ></el-table-column>
+						<el-table-column prop="TargetSlump" label="目标塌落度" ></el-table-column>
+						<el-table-column prop="bestCost" label="最优成本" ></el-table-column>
+						<el-table-column prop="bestCarbon" label="最优碳排放" ></el-table-column>
+				    </el-table>
+				</el-card></el-col>
+
+				<el-col :span="12">
+				<el-card style="margin: 1% 2% 1% 1% ;">
+					<h1> 配比组合解</h1>
+   					<el-divider content-position="right">
+					<el-button type="danger" icon="el-icon-delete" plain style="float:right;padding-top:10px"@click="dialogVisible1=true">删除该记录</el-button>
+					</el-divider>
+					<div id="ss" style="width: 800px;height:500px;"></div>
+					<el-button type="info" plain style="padding-top:10px"@click="dialogVisible2=true">查看最优配比信息</el-button>
+
+				</el-card>
+				</el-col>
+
+				<el-dialog title="配比信息" :visible.sync="dialogVisible" width="45%" :before-close="handleClose">
+					<el-form action="/carbonweb/carbon/" method="post" enctype="multipart/form-data" label-width="90px":label-position='right' :model="creatform" name="creat">
+						{% csrf_token %}
+						<el-row :gutter="10" >
+						<el-input value="{{UID}}" name="UID" style="display:none"></el-input>
+						<el-input value="1" name="ifcreat" style="display:none"></el-input>
+						<el-col :span="8"><el-form-item label="目标天数:" ><el-input type="number" name="creatform" v-model="creatform.targetDay"><template slot="suffix">day</template></el-input></el-form-item></el-col>
+						<el-col :span="8"><el-form-item label="目标强度:" ><el-input type="number" name="creatform"v-model="creatform.targetStrength"><template slot="suffix">MPa</template></el-input></el-form-item></el-col>
+						<el-col :span="8"><el-form-item label="目标塌落度:" ><el-input  :disabled="true" type="number" v-model="targetDat"><template slot="suffix">day</template></el-input></el-form-item></el-col>
+						</el-row>
+          				<el-row :gutter="5" type="flex"align="middle">
+						<el-col :span="1"  ><h1>价格</h1></el-col>
+			  			<el-divider direction="vertical"></el-divider>
+						<el-col :span="8">
+						<el-form-item label="水泥:" ><el-input type="number" name="creatform" v-model="creatform.cementPrice"><template slot="suffix">元/吨</template></el-input></el-form-item>
+                        <el-form-item label="高炉渣:"><el-input type="number" name="creatform" v-model="creatform.GBFSPrice"><template slot="suffix">元/吨</template></el-input></el-form-item>
+                        <el-form-item label="飞灰:"><el-input type="number" name="creatform" v-model="creatform.FAPrice"><template slot="suffix">元/吨</template></el-input></el-form-item>
+                        <el-form-item label="水:"><el-input type="number" name="creatform" v-model="creatform.waterPrice"><template slot="suffix">元/吨</template></el-input></el-form-item>
+                        <el-form-item label="细骨料:"><el-input type="number" name="creatform" v-model="creatform.FAggregatePrice"><template slot="suffix">元/吨</template></el-input></el-form-item>
+                        <el-form-item label="粗骨料:"><el-input type="number" name="creatform" v-model="creatform.CAggregatePrice"><template slot="suffix">元/吨</template></el-input></el-form-item>
+                        <el-form-item label="减水剂:"><el-input type="number" name="creatform" v-model="creatform.SuperplasticizerPrice"><template slot="suffix">元/吨</template></el-input></el-form-item></el-col>
+						<el-col :span="2" ></el-col>
+						<el-col :span="1"><h1>碳排放因子</h1></el-col>
+						<el-divider direction="vertical"></el-divider>
+						<el-col :span="12">
+						<el-form-item label="水泥:" ><el-select v-model="creatform.carboncement" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistcement" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carboncement" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+                        <el-form-item label="高炉渣:"><el-select v-model="creatform.carbonGBFS" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistGBFS" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carbonGBFS" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+                        <el-form-item label="飞灰:"><el-select v-model="creatform.carbonFA" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistFA" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carbonFA" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+                        <el-form-item label="水:"><el-select v-model="creatform.carbonwater" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistwater" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carbonwater" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+                        <el-form-item label="细骨料:"><el-select v-model="creatform.carbonFAggregate" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistFAggregate" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carbonFAggregate" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+                        <el-form-item label="粗骨料:"><el-select v-model="creatform.carbonCAggregate" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistCAggregate" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carbonCAggregate" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+                        <el-form-item label="减水剂:"><el-select v-model="creatform.carbonSuperplasticizer" clearable filterable  placeholder="推荐值" style="width:50%"><el-option v-for="item in factorlistSuperplasticizer" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select><el-input type="number" name="creatform" v-model="creatform.carbonSuperplasticizer" style="width:45%"><template slot="suffix">kgCO2e/t</template></el-input></el-form-item>
+						</el-row>
+					</el-form>
+					<span slot="footer" class="dialog-footer">
+						<el-button @click="dialogVisible = false">取 消</el-button>
+						<el-button type="primary" onclick="document:creat.submit();dialogVisible = false" >确 定</el-button>
+				  	</span>
+				</el-dialog>
+
+				<el-dialog title="确认删除配方？" :visible.sync="dialogVisible1" width="15%" :before-close="handleClose">
+					<span slot="footer" class="dialog-footer">
+						<el-button @click="dialogVisible1 = false">取 消</el-button>
+						<el-button type="danger" onclick="document:gocarbonDelete.submit();dialogVisible1 = false" >确 定</el-button>
+				  	</span>
+				</el-dialog>
+				<el-dialog title="最优配比" :visible.sync="dialogVisible2" width="45%" :before-close="handleClose">
+				    <el-table :data="Best"   :default-sort = "{prop: 'date', order: 'descending'}" stripe >
+<!--						<el-table-column type="selection"></el-table-column>-->
+<!--						<el-table-column prop="FactorCalss" label="类别":filters="{{factorClasslist}}" :filter-method="filterTag" filter-placement="bottom-end"></el-table-column>-->
+						<el-table-column prop="FormulaID" label="配方编号" ></el-table-column>
+						<el-table-column label="结果预测">
+						<el-table-column prop="cost" sortable  width="130%" label="成本(元/m3)" ></el-table-column>
+						<el-table-column prop="carbon" sortable width="200%" label="碳排放(kgCO2e/m3)" ></el-table-column></el-table-column>
+						<el-table-column label="配比(kg/m3)">
+						<el-table-column prop="cement" label="水泥" ></el-table-column>
+						<el-table-column prop="GBFS" label="高炉渣" ></el-table-column>
+						<el-table-column prop="FA" label="飞灰" ></el-table-column>
+						<el-table-column prop="water" label="水" ></el-table-column>
+						<el-table-column prop="FAggregate" label="细骨料" ></el-table-column>
+						<el-table-column prop="CAggregate" label="粗骨料" ></el-table-column>
+						<el-table-column prop="Superplasticizer" label="减水剂" ></el-table-column></el-table-column>
+				    </el-table>
+					<el-descriptions   class="margin-top" title="配方价格(元/吨)" :column="4" :size="size" border  :label-style="label_style" :contentStyle="content_style">
+						<el-descriptions-item  v-for="item in PricePrice" :label="item.label"  ><el-input v-model="item.value" :disabled="true"></el-input>
+						</el-descriptions-item>
+
+					  </el-descriptions>
+					<span slot="footer" class="dialog-footer">
+						<el-button @click="dialogVisible2 = false">关闭</el-button>
+<!--						<el-button type="danger" onclick="dialogVisible2 = false" >确 定</el-button>-->
+				  	</span>
+				</el-dialog>
+			</div>
+
+		  </el-container>
+		</el-container>
+
+
+
+	</div>
+
+ </div>
+
+</body>
+
+
+
+<script>
+	window.onload=function(){
+	a.$data.factorlistcement = '{{factorlistcement}}'
+	while(a.$data.factorlistcement.indexOf('&#x27')!= '-1'){a.$data.factorlistcement = a.$data.factorlistcement.replace('&#x27;','"')}a.$data.factorlistcement = JSON.parse(a.$data.factorlistcement);
+	a.$data.factorlistGBFS = '{{factorlistGBFS}}'
+	while(a.$data.factorlistGBFS.indexOf('&#x27')!= '-1'){a.$data.factorlistGBFS = a.$data.factorlistGBFS.replace('&#x27;','"')}a.$data.factorlistGBFS = JSON.parse(a.$data.factorlistGBFS);
+	a.$data.factorlistFA = '{{factorlistFA}}'
+	while(a.$data.factorlistFA.indexOf('&#x27')!= '-1'){a.$data.factorlistFA = a.$data.factorlistFA.replace('&#x27;','"')}a.$data.factorlistFA = JSON.parse(a.$data.factorlistFA);
+	a.$data.factorlistwater = '{{factorlistwater}}'
+	while(a.$data.factorlistwater.indexOf('&#x27')!= '-1'){a.$data.factorlistwater = a.$data.factorlistwater.replace('&#x27;','"')}a.$data.factorlistwater = JSON.parse(a.$data.factorlistwater);
+	a.$data.factorlistFAggregate = '{{factorlistFAggregate}}'
+	while(a.$data.factorlistFAggregate.indexOf('&#x27')!= '-1'){a.$data.factorlistFAggregate = a.$data.factorlistFAggregate.replace('&#x27;','"')}a.$data.factorlistFAggregate = JSON.parse(a.$data.factorlistFAggregate);
+	a.$data.factorlistCAggregate = '{{factorlistCAggregate}}'
+	while(a.$data.factorlistCAggregate.indexOf('&#x27')!= '-1'){a.$data.factorlistCAggregate = a.$data.factorlistCAggregate.replace('&#x27;','"')}a.$data.factorlistCAggregate = JSON.parse(a.$data.factorlistCAggregate);
+	a.$data.factorlistSuperplasticizer = '{{factorlistSuperplasticizer}}'
+	while(a.$data.factorlistSuperplasticizer.indexOf('&#x27')!= '-1'){a.$data.factorlistSuperplasticizer = a.$data.factorlistSuperplasticizer.replace('&#x27;','"')}a.$data.factorlistSuperplasticizer = JSON.parse(a.$data.factorlistSuperplasticizer);
+	a.$data.Optimizes = '{{Optimizes}}'
+	while(a.$data.Optimizes.indexOf('&#x27')!= '-1'){a.$data.Optimizes = a.$data.Optimizes.replace('&#x27;','"')}a.$data.Optimizes = JSON.parse(a.$data.Optimizes);
+	a.$data.Best = '{{Best}}'
+	while(a.$data.Best.indexOf('&#x27')!= '-1'){a.$data.Best = a.$data.Best.replace('&#x27;','"')}a.$data.Best = JSON.parse(a.$data.Best);
+
+	a.$data.PricePrice = '{{PricePrice}}'
+	while(a.$data.PricePrice.indexOf('&#x27')!= '-1'){a.$data.PricePrice = a.$data.PricePrice.replace('&#x27;','"')}a.$data.PricePrice = JSON.parse(a.$data.PricePrice);
+
+
+	}
+
+	var a = new Vue({
+		el: '#app',
+		data:{
+			creatform:{
+				targetDay:'',
+				targetStrength:'',
+				cementPrice:'',
+				GBFSPrice:'',
+				FAPrice:'',
+				waterPrice:'',
+				FAggregatePrice:'',
+				CAggregatePrice:'',
+				SuperplasticizerPrice:'',
+				carboncement:'',
+				carbonGBFS:'',
+				carbonFA:'',
+				carbonwater:'',
+				carbonFAggregate:'',
+				carbonCAggregate:'',
+				carbonSuperplasticizer:'',
+			},
+			Optimizes:[],
+			Best:[],
+			factorlistcement:[],
+			factorlistGBFS:[],
+			factorlistFA:[],
+			factorlistwater:[],
+			factorlistFAggregate:[],
+			factorlistCAggregate:[],
+			factorlistSuperplasticizer:[],
+			PricePrice:[],
+			carbonCement:'',
+			OptimizeID:'',
+			dialogVisible:false,
+			dialogVisible1:false,
+			dialogVisible2:false,
+			label_style: {
+				'text-align': 'center',//文本居中
+				'font-weight': '100',
+				'height': '60px',
+				'width': '10%',
+				'word-break': 'keep-all'
+			},
+
+
+			},
+		methods: {
+			handleRowClicked1(row, column, event){
+				document:gocarbon.submit();
+			},
+			mouseenter(row, column, event){
+				this.OptimizeID=row.OptimizeID
+			},
+		},
+	})
+
+	var costCarbon = '{{costCarbon}}';
+	var costCarbons = costCarbon.replace(/&#x27;/g,'"');
+	var jsoncostCarbons=JSON.parse(costCarbons)
+
+	var ss = echarts.init(document.getElementById('ss'));
+	var ssoption = jsoncostCarbons;
+	ss.setOption(ssoption);
+
+
+	</script>
+
+<style>
+.el-descriptions__body {
+  width: 100%;
+}
+.el-header {background-color: #B3C0D1;color: #333;line-height: 60px;}
+input::-webkit-inner-spin-button {-webkit-appearance: none !important;}
+.el-aside {color: #333;}
+footer {width: 280px;height: 0px;border-top: none;border-bottom: 50px #636363 solid;border-left: transparent 100px solid;border-right: none;position: fixed;bottom: 10px;right: 10px;color: rgba(256, 256, 256, 0.5);}
+</style>
+<script>
+//按键触发
+document.onkeydown = function(){
+    //禁止ctrl+u
+    if (event.ctrlKey && window.event.keyCode==85){return false;}
+    //禁止 F12
+    if (window.event && window.event.keyCode == 123) {event.keyCode = 0;event.returnValue = false;}
+	//禁止ctrl+s
+    if (event.ctrlKey && window.event.keyCode==83){return false;}
+    }
+//网站禁止选择文字
+document.body.onselectstart = function() {
+    self.event.returnValue=false
+	};
+</script>
+</html>

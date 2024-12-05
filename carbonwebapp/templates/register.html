@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico">
+		<link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico">
+		<!-- 1. 导入css -->
+		<link rel="stylesheet" href="/static/index.css">
+		<!-- 2. 引入vue和vue-->
+		<script src="/static/SupportingDocuments/vue.js"></script>
+		<!-- 3. 引入ElementUI组件 -->
+		<script src="/static/index.js"></script>
+		<!-- 4. 引入图标 -->
+		<link rel ="shortcut icon" type="image/x-icon" href="/static/image/labelimgweb/web_icon.png">
+
+<body  style="background-image:url(/static/image/webimg/register.jpg); background-size:100% 100%;overflow:hidden"oncontextmenu=self.event.returnValue=false>
+
+<div id="app" class="login-box">
+
+    <el-form action="/carbonweb/saveregister/" method="POST" enctype="multipart/form-data" name="register">
+        {% csrf_token %}
+        <h4 class="login-title" style="margin:-10px 0px 10px 0">NFLG智慧混凝土平台注册</h4>
+        <el-input type="text" name="User" placeholder="请设置账号名称" v-model="user" class="login-user"></el-input>
+        <el-input type="password" name="Pass" placeholder="请设置登录密码" v-model="pwd" class="login-pwd"></el-input>
+        <el-input type="email" name="Mail" placeholder="请设置邮箱" v-model="Mail" class="login-pwd"></el-input>
+        <el-button  type="primary" @click="submitform" class="login-login">注册</el-button>
+    </el-form>
+
+    	<div style="margin:-2% 0% -5% 0%;">
+        <small>已有账号? </small><a href="/carbonweb/" style="text-decoration:none;color:#0055ff;white-space:nowrap;"><small>去登录</small></a>
+	</div>
+
+</div>
+<style>
+    h2{
+    }
+    body{
+            margin: 0px;
+            background-color: #DFDFDF;  /*把背景设为灰色*/
+        }
+
+
+
+
+  .box-card {
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+
+
+  }
+    body{
+            margin: 0px;
+            background-color: #DFDFDF;  /*把背景设为灰色*/
+        }
+ .login-box{
+    background-color: white;
+	width:300px;
+
+	margin:15% 40%;
+	border:1px solid #DCDFE6;
+	padding:30px;
+	border-radius:5px;
+	box-shadow: 0 0 30px #DCDFE6;
+  }
+  .login-title{
+  	margin:0px 0 0px 0;
+    text-align: center;
+    font-size:25px
+  }
+  .login-login{
+  	width:300px;
+	margin:10px 0px;
+
+  }
+   .login-user{
+	margin:10px 0 5px 0;
+  }
+  .login-pwd{
+	margin:10px 0 5px 0;
+  }
+</style>
+<script>
+    new Vue({
+      el: '#app',
+        data:{
+          user:"",
+          pwd:"",
+          Mail:"",
+        },
+        methods:{
+          submitform:function () {
+          if(this.user){
+              document.register.submit();
+              }
+          else{
+              this.$message.error({
+              showClose: true,
+              message: '请输入用户名',
+              type: 'error',
+              center: true
+            });}
+          }
+        }
+    })
+
+
+  </script>
+</body>
+
+<script>
+	//按键触发
+document.onkeydown = function(){
+    //禁止ctrl+u
+    if (event.ctrlKey && window.event.keyCode==85){
+    return false;
+    }
+    //禁止 F12
+    if (window.event && window.event.keyCode == 123) {
+    event.keyCode = 0;
+    event.returnValue = false;
+    }
+	//禁止ctrl+s
+    if (event.ctrlKey && window.event.keyCode==83){
+    return false;
+    }
+	//禁止 F5
+
+    }
+//网站禁止选择文字
+    document.body.onselectstart = function() {
+    self.event.returnValue=false
+};
+</script>
+
+</html>

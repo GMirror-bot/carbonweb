@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页面</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body style="background-image:url(/static/image/webimg/login1.jpg); background-size:100% 110%;overflow:hidden"oncontextmenu=self.event.returnValue=false>
+
+<div id="app" style="" class="login-box">
+
+	<el-form action="/imglabel/" method="post" enctype="multipart/form-data" name="login">
+		{% csrf_token %}
+		<h4 class="login-title" style="margin:-10px 0px 10px 0">登录南方路机碳足迹平台</h4>
+		<el-input type="text" placeholder="请输入用户名" name="User" v-model="user" class="login-user"></el-input>
+        <el-input type="password" placeholder="请输入密码" name="Pass" v-model="pwd" class="login-pwd"></el-input>
+		<el-button type="primary" value="登陆" class="login-login" @click="upsubmit">登陆</el-button>
+	</el-form>
+
+	<div>
+		<a href="/imglabel/register/" style="text-decoration:none;margin:0px 0px;color:#333;"><small>用户注册</small></a>
+	</div>
+<!--	<div style="margin:-20px 250px;">-->
+<!--		<a href="/imglabel/retrievepassword/" style="text-decoration:none;margin:0px 0px;color:#333;white-space:nowrap;"><small>忘记密码</small></a>-->
+<!--	</div>-->
+
+
+</div>
+
+
+</body>
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { value: true }
+      }
+    })
+  </script>
+<style>
+  .login-box{
+    background-color: white;
+	width:300px;
+	margin:15% 70%;
+	border:1px solid #DCDFE6;
+	padding:30px;
+	border-radius:5px;
+	box-shadow: 0 0 30px #DCDFE6;
+  }
+  .login-user{
+	margin:10px 0 5px 0;
+  }
+  .login-pwd{
+	margin:10px 0 5px 0;
+  }
+  .login-login{
+  	width:300px;
+	margin:10px 0px;
+
+  }
+  .login-title{
+  	margin:0px 0 0px 0;
+    text-align: center;
+    font-size:25px
+  }
+
+
+</style>
+</html>
